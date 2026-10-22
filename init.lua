@@ -37,25 +37,30 @@ MainFrame.Size = UDim2.new(0, OriginUI.Config.WindowSize.X, 0, OriginUI.Config.W
 MainFrame.Position = UDim2.new(0.5, -OriginUI.Config.WindowSize.X/2, 0.5, -OriginUI.Config.WindowSize.Y/2)
 MainFrame.BackgroundColor3 = theme.Background
 MainFrame.BorderSizePixel = 0
-MainFrame.Active, MainFrame.Draggable = true, true
+MainFrame.Active = true
+MainFrame.Draggable = true
 MainFrame.Parent = ScreenGui
-Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 16)
+
+local MainCorner = Instance.new("UICorner")
+MainCorner.CornerRadius = UDim.new(0, 16)
+MainCorner.Parent = MainFrame
 
 local ChassisStroke = Instance.new("UIStroke")
 ChassisStroke.Color = theme.AccentLine
 ChassisStroke.Thickness = 1
 ChassisStroke.Parent = MainFrame
 
--- Welcome View Frame
+-- Welcome View Container Frame
 local WelcomeView = Instance.new("Frame")
+WelcomeView.Name = "WelcomeView"
 WelcomeView.Size = UDim2.new(1, 0, 1, 0)
 WelcomeView.BackgroundTransparency = 1
 WelcomeView.Parent = MainFrame
 
 -- Central Eye Logo
 local EyeLogo = Instance.new("ImageLabel")
-EyeLogo.Size = UDim2.new(0, 90, 0, 50)
-EyeLogo.Position = UDim2.new(0.5, -45, 0.12, 0)
+EyeLogo.Size = UDim2.new(0, 110, 0, 60)
+EyeLogo.Position = UDim2.new(0.5, -55, 0.1, 0)
 EyeLogo.BackgroundTransparency = 1
 EyeLogo.Image = "rbxassetid://13511110006"
 EyeLogo.ImageColor3 = theme.PrimaryText
@@ -69,15 +74,15 @@ HeaderLabel.Position = UDim2.new(0, 20, 0.28, 0)
 HeaderLabel.BackgroundTransparency = 1
 HeaderLabel.Text = OriginUI.Config.TitleText
 HeaderLabel.TextColor3 = theme.PrimaryText
-HeaderLabel.TextSize = 28
+HeaderLabel.TextSize = 26
 HeaderLabel.Font = Enum.Font.GothamBold
 HeaderLabel.TextXAlignment = Enum.TextXAlignment.Center
 HeaderLabel.Parent = WelcomeView
 
 -- Subtitle Description Text
 local DescriptionLabel = Instance.new("TextLabel")
-DescriptionLabel.Size = UDim2.new(1, -60, 0, 60)
-DescriptionLabel.Position = UDim2.new(0, 30, 0.38, 0)
+DescriptionLabel.Size = UDim2.new(1, -80, 0, 70)
+DescriptionLabel.Position = UDim2.new(0, 40, 0.38, 0)
 DescriptionLabel.BackgroundTransparency = 1
 DescriptionLabel.Text = OriginUI.Config.DescriptionText
 DescriptionLabel.TextColor3 = theme.MutedText
@@ -90,7 +95,7 @@ DescriptionLabel.Parent = WelcomeView
 -- Sign In Button
 local SignInButton = Instance.new("TextButton")
 SignInButton.Size = UDim2.new(1, -80, 0, 48)
-SignInButton.Position = UDim2.new(0, 40, 0.65, 0)
+SignInButton.Position = UDim2.new(0, 40, 0.63, 0)
 SignInButton.BackgroundColor3 = theme.PanelElement
 SignInButton.BorderSizePixel = 0
 SignInButton.Text = "Sign in"
@@ -99,7 +104,10 @@ SignInButton.Font = Enum.Font.GothamBold
 SignInButton.TextSize = 15
 SignInButton.AutoButtonColor = true
 SignInButton.Parent = WelcomeView
-Instance.new("UICorner", SignInButton).CornerRadius = UDim.new(0, 12)
+
+local BtnCorner = Instance.new("UICorner")
+BtnCorner.CornerRadius = UDim.new(0, 12)
+BtnCorner.Parent = SignInButton
 
 local ButtonBorder = Instance.new("UIStroke")
 ButtonBorder.Color = theme.AccentLine
@@ -120,6 +128,7 @@ FooterLabel.Parent = WelcomeView
 
 -- Credentials View Frame
 local CredentialsView = Instance.new("Frame")
+CredentialsView.Name = "CredentialsView"
 CredentialsView.Size = UDim2.new(1, 0, 1, 0)
 CredentialsView.BackgroundTransparency = 1
 CredentialsView.Visible = false
@@ -137,7 +146,11 @@ UsernameBox.TextColor3 = theme.PrimaryText
 UsernameBox.TextSize = 14
 UsernameBox.Font = Enum.Font.Gotham
 UsernameBox.Parent = CredentialsView
-Instance.new("UICorner", UsernameBox).CornerRadius = UDim.new(0, 6)
+
+local UserCorner = Instance.new("UICorner")
+UserCorner.CornerRadius = UDim.new(0, 6)
+UserCorner.Parent = UsernameBox
+
 local UserStroke = Instance.new("UIStroke")
 UserStroke.Color = theme.AccentLine
 UserStroke.Parent = UsernameBox
@@ -154,7 +167,11 @@ PasswordBox.TextColor3 = theme.PrimaryText
 PasswordBox.TextSize = 14
 PasswordBox.Font = Enum.Font.Gotham
 PasswordBox.Parent = CredentialsView
-Instance.new("UICorner", PasswordBox).CornerRadius = UDim.new(0, 6)
+
+local PassCorner = Instance.new("UICorner")
+PassCorner.CornerRadius = UDim.new(0, 6)
+PassCorner.Parent = PasswordBox
+
 local PassStroke = Instance.new("UIStroke")
 PassStroke.Color = theme.AccentLine
 PassStroke.Parent = PasswordBox
@@ -170,7 +187,11 @@ FinalSubmitButton.Font = Enum.Font.GothamBold
 FinalSubmitButton.TextSize = 14
 FinalSubmitButton.AutoButtonColor = true
 FinalSubmitButton.Parent = CredentialsView
-Instance.new("UICorner", FinalSubmitButton).CornerRadius = UDim.new(0, 6)
+
+local SubmitCorner = Instance.new("UICorner")
+SubmitCorner.CornerRadius = UDim.new(0, 6)
+SubmitCorner.Parent = FinalSubmitButton
+
 local SubmitStroke = Instance.new("UIStroke")
 SubmitStroke.Color = theme.AccentLine
 SubmitStroke.Parent = FinalSubmitButton
@@ -178,7 +199,8 @@ SubmitStroke.Parent = FinalSubmitButton
 local ErrorMessageLabel = Instance.new("TextLabel")
 ErrorMessageLabel.Size = UDim2.new(1, 0, 0, 20)
 ErrorMessageLabel.Position = UDim2.new(0, 0, 0.88, 0)
-ErrorMessageLabel.BackgroundTransparency, ErrorMessageLabel.TextTransparency = 1, 1
+ErrorMessageLabel.BackgroundTransparency = 1
+ErrorMessageLabel.TextTransparency = 1
 ErrorMessageLabel.Text = ""
 ErrorMessageLabel.TextColor3 = theme.AlertRed
 ErrorMessageLabel.Font = Enum.Font.GothamBold
@@ -186,7 +208,7 @@ ErrorMessageLabel.TextSize = 13
 ErrorMessageLabel.TextXAlignment = Enum.TextXAlignment.Center
 ErrorMessageLabel.Parent = CredentialsView
 
--- Transitions
+-- View Transitions
 SignInButton.MouseButton1Click:Connect(function()
     WelcomeView.Visible = false
     UsernameBox.Text = ""
