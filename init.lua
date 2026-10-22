@@ -1,5 +1,5 @@
 -- ========================================================
--- ORIGIN CLIENT COMPONENT PLATFORM MATRIX (PART 1)
+-- ORIGIN COMBINED RUNTIME FRAMEWORK (PART 1)
 -- ========================================================
 local OriginUI = {
     Config = {
@@ -61,9 +61,8 @@ Instance.new("UICorner", SignInButton).CornerRadius = UDim.new(0, 6)
 local ButtonBorder = Instance.new("UIStroke")
 ButtonBorder.Color = theme.AccentLine
 ButtonBorder.Parent = SignInButton
-
 -- ========================================================
--- ORIGIN CLIENT COMPONENT PLATFORM MATRIX (PART 2)
+-- ORIGIN COMBINED RUNTIME FRAMEWORK (PART 2)
 -- ========================================================
 local CredentialsView = Instance.new("Frame")
 CredentialsView.Size = UDim2.new(1, 0, 1, -50)
@@ -111,6 +110,14 @@ SubmitStroke.Color = theme.AccentLine
 SubmitStroke.Parent = FinalSubmitButton
 Instance.new("UICorner", FinalSubmitButton).CornerRadius = UDim.new(0, 6)
 
+local SettingsIcon = Instance.new("ImageButton")
+SettingsIcon.Size = UDim2.new(0, 20, 0, 20)
+SettingsIcon.Position = UDim2.new(1, -35, 0, 12)
+SettingsIcon.BackgroundTransparency = 1
+SettingsIcon.Image = "rbxassetid://13511115555"
+SettingsIcon.ImageColor3 = theme.MutedText
+SettingsIcon.Parent = MainFrame
+
 local ErrorMessageLabel = Instance.new("TextLabel")
 ErrorMessageLabel.Size = UDim2.new(1, 0, 0, 20)
 ErrorMessageLabel.Position = UDim2.new(0, 0, 0.9, -10)
@@ -119,6 +126,56 @@ ErrorMessageLabel.Text = "Invalid credentials or HWID mismatch."
 ErrorMessageLabel.TextColor3 = theme.AlertRed
 ErrorMessageLabel.Font = Enum.Font.GothamBold
 ErrorMessageLabel.Parent = CredentialsView
+
+local ThemeDropdownMenu = Instance.new("Frame")
+ThemeDropdownMenu.Size = UDim2.new(0, 140, 0, 150)
+ThemeDropdownMenu.Position = UDim2.new(1, -155, 0, 40)
+ThemeDropdownMenu.BackgroundColor3 = theme.PanelElement
+ThemeDropdownMenu.Visible = false
+ThemeDropdownMenu.ZIndex = 5
+ThemeDropdownMenu.Parent = MainFrame
+local MenuStroke = Instance.new("UIStroke")
+MenuStroke.Color = theme.AccentLine
+MenuStroke.Parent = ThemeDropdownMenu
+Instance.new("UICorner", ThemeDropdownMenu).CornerRadius = UDim.new(0, 6)
+
+local function ApplyNewThemeColors(themeName)
+    local targetColors = OriginUI.Themes[themeName]
+    if not targetColors then return end
+    MainFrame.BackgroundColor3 = targetColors.Background
+    ThemeDropdownMenu.BackgroundColor3 = targetColors.PanelElement
+    MenuStroke.Color = targetColors.AccentLine
+    UsernameBox.BackgroundColor3 = targetColors.PanelElement
+    UserStroke.Color = targetColors.AccentLine
+    PasswordBox.BackgroundColor3 = targetColors.PanelElement
+    PassStroke.Color = targetColors.AccentLine
+    FinalSubmitButton.BackgroundColor3 = targetColors.PanelElement
+    SubmitStroke.Color = targetColors.AccentLine
+    SignInButton.BackgroundColor3 = targetColors.PanelElement
+    ButtonBorder.Color = targetColors.AccentLine
+end
+
+local targetStylesList = {"Charcoal", "Arctic", "Ember", "Midnight"}
+for index, styleName in ipairs(targetStylesList) do
+    local StyleSelectButton = Instance.new("TextButton")
+    StyleSelectButton.Size = UDim2.new(1, -10, 0, 30)
+    StyleSelectButton.Position = UDim2.new(0, 5, 0, (index - 1) * 35 + 8)
+    StyleSelectButton.BackgroundTransparency = 1
+    StyleSelectButton.Text = styleName
+    StyleSelectButton.TextColor3 = Color3.fromRGB(200, 200, 200)
+    StyleSelectButton.TextSize = 13
+    StyleSelectButton.Font = Enum.Font.Gotham
+    StyleSelectButton.ZIndex = 6
+    StyleSelectButton.Parent = ThemeDropdownMenu
+    StyleSelectButton.MouseButton1Click:Connect(function()
+        ApplyNewThemeColors(styleName)
+        ThemeDropdownMenu.Visible = false
+    end)
+end
+
+SettingsIcon.MouseButton1Click:Connect(function()
+    ThemeDropdownMenu.Visible = not ThemeDropdownMenu.Visible
+end)
 
 SignInButton.MouseButton1Click:Connect(function()
     WelcomeView.Visible = false
@@ -129,6 +186,7 @@ FinalSubmitButton.MouseButton1Click:Connect(function()
     local targetUser = UsernameBox.Text
     local targetPass = PasswordBox.Text
     if targetUser == "" or targetPass == "" then
+        ErrorMessageLabel.Text = "Please fill in all fields."
         ErrorMessageLabel.TextTransparency = 0
         return
     end
