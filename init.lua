@@ -1,5 +1,5 @@
 -- ========================================================
--- ORIGIN AUTH CLIENT - FULL PRECISE VISUAL LAYOUT
+-- ORIGIN AUTH CLIENT - PRECISE VISUAL LAYOUT
 -- ========================================================
 local OriginUI = {
     Config = {
@@ -24,13 +24,15 @@ local OriginUI = {
 
 local theme = OriginUI.Themes[OriginUI.Config.DefaultTheme]
 
+-- 1. Create Core ScreenGui
 local ScreenGui = Instance.new("ScreenGui")
 ScreenGui.Name = "Origin_Framework"
 ScreenGui.ResetOnSpawn = false
+
 local success, coreGui = pcall(function() return game:GetService("CoreGui") end)
 ScreenGui.Parent = success and coreGui or game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
 
--- Main Chassis
+-- 2. Create Main Chassis Frame
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainChassis"
 MainFrame.Size = UDim2.new(0, OriginUI.Config.WindowSize.X, 0, OriginUI.Config.WindowSize.Y)
@@ -50,7 +52,7 @@ ChassisStroke.Color = theme.AccentLine
 ChassisStroke.Thickness = 1
 ChassisStroke.Parent = MainFrame
 
--- Welcome View Container Frame
+-- 3. Welcome View Container Frame
 local WelcomeView = Instance.new("Frame")
 WelcomeView.Name = "WelcomeView"
 WelcomeView.Size = UDim2.new(1, 0, 1, 0)
@@ -59,8 +61,8 @@ WelcomeView.Parent = MainFrame
 
 -- Central Eye Logo
 local EyeLogo = Instance.new("ImageLabel")
-EyeLogo.Size = UDim2.new(0, 110, 0, 60)
-EyeLogo.Position = UDim2.new(0.5, -55, 0.1, 0)
+EyeLogo.Size = UDim2.new(0, 120, 0, 65)
+EyeLogo.Position = UDim2.new(0.5, -60, 0.08, 0)
 EyeLogo.BackgroundTransparency = 1
 EyeLogo.Image = "rbxassetid://13511110006"
 EyeLogo.ImageColor3 = theme.PrimaryText
@@ -81,7 +83,7 @@ HeaderLabel.Parent = WelcomeView
 
 -- Subtitle Description Text
 local DescriptionLabel = Instance.new("TextLabel")
-DescriptionLabel.Size = UDim2.new(1, -80, 0, 70)
+DescriptionLabel.Size = UDim2.new(1, -80, 0, 60)
 DescriptionLabel.Position = UDim2.new(0, 40, 0.38, 0)
 DescriptionLabel.BackgroundTransparency = 1
 DescriptionLabel.Text = OriginUI.Config.DescriptionText
@@ -90,6 +92,7 @@ DescriptionLabel.TextSize = 13
 DescriptionLabel.Font = Enum.Font.Gotham
 DescriptionLabel.TextWrapped = true
 DescriptionLabel.TextXAlignment = Enum.TextXAlignment.Center
+DescriptionLabel.TextYAlignment = Enum.TextYAlignment.Top
 DescriptionLabel.Parent = WelcomeView
 
 -- Sign In Button
@@ -126,7 +129,7 @@ FooterLabel.Font = Enum.Font.Gotham
 FooterLabel.TextXAlignment = Enum.TextXAlignment.Center
 FooterLabel.Parent = WelcomeView
 
--- Credentials View Frame
+-- 4. Credentials View Frame
 local CredentialsView = Instance.new("Frame")
 CredentialsView.Name = "CredentialsView"
 CredentialsView.Size = UDim2.new(1, 0, 1, 0)
