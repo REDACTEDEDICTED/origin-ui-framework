@@ -8,7 +8,7 @@ local OriginUI = {
         FooterText = "Origin | The First Step",
         WindowSize = Vector2.new(500, 420),
         DefaultTheme = "Charcoal",
-        API_URL = "http://127.0.0.1:5000/api/login" -- Updated to valid IP format
+        API_URL = "http://127.0.0.1:5000/api/login"
     },
     Themes = {
         Charcoal = {
@@ -71,7 +71,7 @@ HeaderLabel.Text = OriginUI.Config.TitleText
 HeaderLabel.TextColor3 = theme.PrimaryText
 HeaderLabel.TextSize = 28
 HeaderLabel.Font = Enum.Font.GothamBold
-HeaderLabel.TextAlignment = Enum.TextAlignment.Center
+HeaderLabel.TextXAlignment = Enum.TextXAlignment.Center
 HeaderLabel.Parent = WelcomeView
 
 -- Subtitle Description Text
@@ -84,7 +84,7 @@ DescriptionLabel.TextColor3 = theme.MutedText
 DescriptionLabel.TextSize = 13
 DescriptionLabel.Font = Enum.Font.Gotham
 DescriptionLabel.TextWrapped = true
-DescriptionLabel.TextAlignment = Enum.TextAlignment.Center
+DescriptionLabel.TextXAlignment = Enum.TextXAlignment.Center
 DescriptionLabel.Parent = WelcomeView
 
 -- Sign In Button
@@ -115,7 +115,7 @@ FooterLabel.Text = OriginUI.Config.FooterText
 FooterLabel.TextColor3 = theme.MutedText
 FooterLabel.TextSize = 12
 FooterLabel.Font = Enum.Font.Gotham
-FooterLabel.TextAlignment = Enum.TextAlignment.Center
+FooterLabel.TextXAlignment = Enum.TextXAlignment.Center
 FooterLabel.Parent = WelcomeView
 
 -- Credentials View Frame
@@ -153,7 +153,6 @@ PasswordBox.PlaceholderColor3 = theme.MutedText
 PasswordBox.TextColor3 = theme.PrimaryText
 PasswordBox.TextSize = 14
 PasswordBox.Font = Enum.Font.Gotham
--- FIX: Removed invalid .Password property assignment
 PasswordBox.Parent = CredentialsView
 Instance.new("UICorner", PasswordBox).CornerRadius = UDim.new(0, 6)
 local PassStroke = Instance.new("UIStroke")
@@ -184,7 +183,7 @@ ErrorMessageLabel.Text = ""
 ErrorMessageLabel.TextColor3 = theme.AlertRed
 ErrorMessageLabel.Font = Enum.Font.GothamBold
 ErrorMessageLabel.TextSize = 13
-ErrorMessageLabel.TextAlignment = Enum.TextAlignment.Center
+ErrorMessageLabel.TextXAlignment = Enum.TextXAlignment.Center
 ErrorMessageLabel.Parent = CredentialsView
 
 -- Transitions
